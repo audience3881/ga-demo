@@ -1,0 +1,24 @@
+#wf name
+name: wf1
+#on is an obj and it takes event, when specific event is triggered,wf will trigger and run
+on:
+  push:
+    #it takes list of branch and when commit is pushed to given branches wf will run
+    branches:
+      - main
+      - "feat/1"
+  pull_request:
+    branches: [main, feat/1]
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    #steps is array of objs
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v4
+      - name: step1
+        run: echo "hi jap-1"
+      - name: step2
+        run: |
+          echo "multi-line"
+          mkdir d1 && cd d1 && touch b1
