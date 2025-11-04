@@ -20,7 +20,7 @@ jobs:
     steps:
       #name of step
       - name: checkout the code
-        #give custom action that will run and perform tasks when we run wf
+        #give built-in ga which will clone the repo on runner so we can run and execute below steps on runner. it is a fundamental step to get the code to runner
         uses: actions/checkout@v4
       - name: step1
         #give shell cmds
