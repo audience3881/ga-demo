@@ -3,22 +3,34 @@ name: wf1
 #on is an obj and it takes event, when specific event is triggered,wf will trigger and run
 on:
   push:
-    #it takes list of branch and when commit is pushed to given branches wf will run
+    #it takes list of branch and when commit is pushed to given branches in rr wf will trigger and run
     branches:
       - main
       - "feat/1"
   pull_request:
     branches: [main, feat/1]
+#its an obj
 jobs:
+  #give job name
   job1:
+    #give runner name where wf will run
     runs-on: ubuntu-latest
     #steps is array of objs
     steps:
+      #name of step
       - name: checkout the code
+        #give custom action that will run and perform tasks when we run wf
         uses: actions/checkout@v4
       - name: step1
+        #give shell cmds
         run: echo "hi jap-1"
       - name: step2
+        #| is used to preserve new lines so all the new lines are maintained. it is used for multi-line string
         run: |
           echo "multi-line"
           mkdir d1 && cd d1 && touch b1
+      - name: step3
+        #> is used to represent multi-line string as single line
+        run: >
+          echo "osaka-1"
+          mkdir d2 && echo "mum-1">c1
