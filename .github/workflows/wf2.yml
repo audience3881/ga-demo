@@ -1,3 +1,4 @@
+#--- seperator is used to create multiple yaml docs within single yaml file
 ---
 name: wf2
 on:

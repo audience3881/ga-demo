@@ -1,0 +1,26 @@
+---
+#wf name
+name: wf3
+on:
+  #means we have to manually trigger the wf and wf will run
+  workflow_dispatch:
+#env attri is used to set env var
+#wf scoped var
+env:
+  env1: "val1"
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    #job scoped var means var is available to all the steps within the job
+    env:
+      env2: "val2"
+    steps:
+      - name: clone the repo onto runner
+        uses: actions/checkout@v4
+      - name: step1
+        run: echo "$env1 $env3" #access env var using $env_var_name
+        #step scoped var means var is available in curr step only
+        env:
+          env3: 10
+      - name: step2
+        run: echo "$env2"
