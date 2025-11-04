@@ -9,6 +9,7 @@ on:
       - "feat/1"
   pull_request:
     branches: [main, feat/1]
+  workflow_dispatch:
 #its an obj
 jobs:
   #give job name
