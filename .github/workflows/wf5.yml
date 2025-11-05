@@ -1,0 +1,20 @@
+---
+name: config var
+on:
+  workflow_dispatch:
+env:
+  env1: "jap-2"
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    env:
+      env2: "mum-2"
+    steps:
+      - name: clone the git lr on runner
+        uses: actions/checkout@v4
+      - name: step1
+        run: echo "$env1 $env3"
+        env:
+          env3: "del-2"
+      - name: step2
+        run: echo "$env2 ${{vars.PROJ_ID}}"

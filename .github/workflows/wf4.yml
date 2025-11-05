@@ -31,7 +31,7 @@ jobs:
           mkdir d1 && cd d1 && touch b1
 
 ---
-name: wf5
+name: wf-demo
 on:
   workflow_dispatch:
 env:
