@@ -1,0 +1,16 @@
+---
+name: wf8 -> access secrets in wf file
+on:
+  workflow_dispatch:
+env:
+  env1: "aws_env"
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone the git lr on runner
+        uses: actions/checkout@v4
+      - name: step1
+        run: |
+          echo "$env1"
+          echo "secret is ${{secrets.SECRET1}}"
