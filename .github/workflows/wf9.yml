@@ -1,0 +1,26 @@
+---
+#wf name
+name: create and run self-hr on vm
+#wf will trigger and run when given events are triggered
+on:
+  push:
+    branches:
+      - main
+      - feat/1
+  workflow_dispatch:
+#wf scoped env var
+env:
+  env1: "jap-2"
+jobs:
+  job1:
+    #wf will run inside self-hr running inside vm, self-hr listening for jobs
+    runs-on: self-hosted
+    steps:
+      - name: clone git lr on self-hr
+        uses: actions/checkout@v4
+      - name: step1
+        run: echo "val is $env1"
+      - name: use context vars
+        run: |
+          echo "repo name ${{github.repository}}"
+          echo "user running wf file ${{github.actor}}"
