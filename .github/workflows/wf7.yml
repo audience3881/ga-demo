@@ -1,28 +1,26 @@
 ---
-name: wf7 -> give pars as the inputs when we manually run the wf
+name: wf7 -> give ip pars when we manually run the wf
 on:
   workflow_dispatch:
     inputs:
-      n1:
-        #desc of a ip
-        description: number
-        #use default val if we dont pass the ip par
+      i1:
+        description: val of i1
         default: 1
-        #true means we have to pass the ip pars to run the wf
+        #true means ip par is required to run the wf
         required: true
-      n2:
-        description: number
+      i2:
+        description: "val of i2"
         default: 2
         required: true
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - name: clone the git lr on runner
+      - name: clone the git lr on runner, runner is a vm where wf runs
         uses: actions/checkout@v4
-      - name: evaluate the vals
-        #it is a unique identifier for step and is used aong with steps context to ref the step in other steps
-        id: sum
-        run: echo "::set-output name a1=$((${{inputs.n1}}+${{inputs.n2}}))"
-      - name: display the sum
-        run: echo "sum of ${{inputs.n1}} and ${{inputs.n2}} is ${{steps.sum.outputs.a1}}"
+      - name: calc
+        #it is a unique identifier for step and is used along with steps context to give the step ref
+        id: id1
+        run: echo "::set-output name=op1::$((${{inputs.i1}}+${{inputs.i2}}))"
+      - name: step2
+        run: echo "sum of ${{inputs.i1}} and ${{inputs.i2}} is ${{steps.id1.outputs.op1}}"
