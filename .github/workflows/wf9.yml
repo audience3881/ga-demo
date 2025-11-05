@@ -1,6 +1,6 @@
 ---
 #wf name
-name: create and run self-hr on vm
+name: wf9 -> create and run self-hr on vm
 #wf will trigger and run when given events are triggered
 on:
   push:
