@@ -23,4 +23,4 @@ jobs:
           echo "val is $env1"
           echo "repo name: ${{github.repository}}"
           echo "wf name: ${{github.workflow}}"
-          echi "triggered by: ${{github.triggered_actor}}"
+          echo "triggered by: ${{github.triggered_actor}}"
