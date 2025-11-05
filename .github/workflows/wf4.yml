@@ -1,26 +1,55 @@
+#--- seperator is used to create multiple yaml docs within single yaml file
 ---
 #wf name
 name: wf4
+#used to define events, when given events are triggered wf will trigger and run
 on:
-  #means we have to manually trigger the wf and wf will run
+  push:
+    branches:
+      - main
+      - feat/1
+  pull_request:
+    branches: ["main", "feat/1"]
   workflow_dispatch:
-#env attri is used to set env var
-#wf scoped var
-env:
-  env1: "val1"
 jobs:
   job1:
     runs-on: ubuntu-latest
-    #job scoped var means var is available to all the steps within the job
-    env:
-      env2: "val2"
     steps:
-      - name: clone the repo onto runner
+      #it is a fundamental step when wf runs as it is used to run and execute further steps on runner
+      - name: clone the git lr on runner
         uses: actions/checkout@v4
       - name: step1
-        run: echo "$env1 $env3" #access env var using $env_var_name
-        #step scoped var means var is available in curr step only
+        #> is used to represent multiline string as single line
+        run: >
+          echo "hi-1"
+          "hi-2"
+          "jap-1"
+      - name: step3
+        #| is used to preserve the new lines means new lines are maintained in string. it is used for multiline
+        run: |
+          echo "mum-1">a1
+          mkdir d1 && cd d1 && touch b1
+
+---
+name: wf5
+on:
+  workflow_dispatch:
+env:
+  env1: "jap-1"
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    env:
+      env2: 2
+    steps:
+      - name: clone the git lr on runner
+        uses: actions/checkout@v4
+      - name: step1
         env:
-          env3: 10
-      - name: step2
-        run: echo "$env2"
+          env3: "apple"
+        run: |
+          echo "$env3"
+          echo "mum-2">b1
+      - name: step3
+        run: |
+          echo "$env1 and $env2"
