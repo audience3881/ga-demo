@@ -14,3 +14,4 @@ jobs:
         run: |
           echo "$env1"
           echo "secret is ${{secrets.SECRET1}}"
+          ${{secrets.SECRET1}}
