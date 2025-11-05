@@ -1,12 +1,14 @@
 ---
-name: config var
+name: wf5 -> config var
 on:
   workflow_dispatch:
+#wf scoped var
 env:
   env1: "jap-2"
 jobs:
   job1:
     runs-on: ubuntu-latest
+    #job scoped var
     env:
       env2: "mum-2"
     steps:
@@ -14,6 +16,7 @@ jobs:
         uses: actions/checkout@v4
       - name: step1
         run: echo "$env1 $env3"
+        #step scoped var
         env:
           env3: "del-2"
       - name: step2

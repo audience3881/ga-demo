@@ -1,0 +1,26 @@
+---
+name: wf6 -> context vars
+on:
+  workflow_dispatch:
+env:
+  env1: "j1"
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    env:
+      env2: "osaka-2"
+    steps:
+      - name: clone git repo on runner, runner is a vm where wf runs
+        uses: actions/checkout@v4
+      - name: step1
+        run: >
+          echo "name is $env3"
+          echo "city is $env2"
+        env:
+          env3: "jack-2"
+      - name: step2
+        run: |
+          echo "val is $env1"
+          echo "repo name: ${{github.repository}}"
+          echo "wf name: ${{github.workflow}}"
+          echi "triggered by: ${{github.triggered_actor}}"
